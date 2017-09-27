@@ -57,7 +57,8 @@ ReactDatez.propTypes = {
     endDate: PropTypes.instanceOf(Date),
     dateFormat: PropTypes.string,
     yearJump: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    local: PropTypes.string
 }
 ```
 #### input
@@ -107,6 +108,9 @@ Positioning of the popup, 'left', 'center', 'right'
 Add a placeholder in the input fields
 > Default: ''
 
+#### local
+Using localization moment 'ru','vi'.....
+> Default: 'ru'
 
 ---
 
