@@ -53,7 +53,16 @@ class ReactDatez extends Component {
 
   initialisePicker() {
     const input = this.props.input || {};
-
+    if (this.props.noInput) {
+      const { value } = this.props;
+      this.setState({
+        selectedDate: moment(value),
+        datePickerInputHeight: `${this.dateInput.clientHeight}px`,
+        weekStartsOn: moment(`1 ${this.state.currentMonthYear}`, "D M YYYY").day(),
+        currentMonthYear: moment(value).format("M YYYY")
+      });
+      return;
+    }
     this.setState({
       selectedDate:
         input.value && moment(input.value, this.props.dateFormat).isValid()

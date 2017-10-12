@@ -33,3 +33,6 @@ Thumbs.db
 
 #secret keys
 *.pem
+
+release.zip
+release/*
