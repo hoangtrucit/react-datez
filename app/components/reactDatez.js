@@ -216,7 +216,7 @@ class ReactDatez extends Component {
 
   closePicker() {
     document.body.classList.remove("date-open");
-    this.props.callbackOnClose && this.props.callbackOnClose();
+    this.props.callbackOnClose && this.props.callbackOnClose(this.state.selectedDate);
     this.setState({
       datePickerOpen: false
     });
