@@ -216,7 +216,7 @@ class ReactDatez extends Component {
 
   closePicker() {
     document.body.classList.remove("date-open");
-
+    this.props.callbackOnClose && this.props.callbackOnClose();
     this.setState({
       datePickerOpen: false
     });
@@ -567,7 +567,8 @@ ReactDatez.propTypes = {
   dateFormat: PropTypes.string,
   yearJump: PropTypes.bool,
   placeholder: PropTypes.string,
-  local: PropTypes.string
+  local: PropTypes.string,
+  callbackOnClose: PropTypes.func
 };
 
 export default ReactDatez;

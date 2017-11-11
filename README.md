@@ -112,6 +112,9 @@ Add a placeholder in the input fields
 Using localization moment 'ru','vi'.....
 > Default: 'ru'
 
+#### callbackOnClose
+callback when picker close
+
 ---
 
 ### Redux Forms
