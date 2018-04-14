@@ -58,7 +58,10 @@ class ReactDatez extends Component {
       this.setState({
         selectedDate: moment(value),
         datePickerInputHeight: `${this.dateInput.clientHeight}px`,
-        weekStartsOn: moment(`1 ${this.state.currentMonthYear}`, "D M YYYY").day(),
+        weekStartsOn: moment(
+          `1 ${this.state.currentMonthYear}`,
+          "D M YYYY"
+        ).day(),
         currentMonthYear: moment(value).format("M YYYY")
       });
       return;
@@ -69,7 +72,10 @@ class ReactDatez extends Component {
           ? moment(input.value, this.props.dateFormat)
           : "",
       datePickerInputHeight: `${this.dateInput.clientHeight}px`,
-      weekStartsOn: moment(`1 ${this.state.currentMonthYear}`, "D M YYYY").day(),
+      weekStartsOn: moment(
+        `1 ${this.state.currentMonthYear}`,
+        "D M YYYY"
+      ).day(),
       currentMonthYear:
         input.value && moment(input.value, this.props.dateFormat).isValid()
           ? moment(input.value, this.props.dateFormat).format("M YYYY")
@@ -78,7 +84,11 @@ class ReactDatez extends Component {
   }
 
   handleClickEvent(event) {
-    if (this.rdatez && !this.rdatez.contains(event.target) && this.state.datePickerOpen) {
+    if (
+      this.rdatez &&
+      !this.rdatez.contains(event.target) &&
+      this.state.datePickerOpen
+    ) {
       this.closePicker();
     }
   }
@@ -111,7 +121,12 @@ class ReactDatez extends Component {
       i -= 1
     ) {
       years.push(
-        <a href="" className="rdatez-year" key={`years-${i}`} onClick={e => this.clickYear(e, i)}>
+        <a
+          href=""
+          className="rdatez-year"
+          key={`years-${i}`}
+          onClick={e => this.clickYear(e, i)}
+        >
           {i}
         </a>
       );
@@ -188,7 +203,9 @@ class ReactDatez extends Component {
   }
 
   isBeforeStartDate(date) {
-    if (moment(this.props.endDate).diff(moment(date, this.props.dateFormat)) < 0) {
+    if (
+      moment(this.props.endDate).diff(moment(date, this.props.dateFormat)) < 0
+    ) {
       return true;
     }
 
@@ -196,7 +213,9 @@ class ReactDatez extends Component {
   }
 
   isAfterEndDate(date) {
-    if (moment(this.props.startDate).diff(moment(date, this.props.dateFormat)) > 0) {
+    if (
+      moment(this.props.startDate).diff(moment(date, this.props.dateFormat)) > 0
+    ) {
       return true;
     }
 
@@ -205,7 +224,7 @@ class ReactDatez extends Component {
 
   openPicker() {
     document.body.classList.add("date-open");
-
+    this.props.callbackOnOpenPicker && this.props.callbackOnOpenPicker();
     this.setState({
       datePickerOpen: true
     });
@@ -216,7 +235,8 @@ class ReactDatez extends Component {
 
   closePicker() {
     document.body.classList.remove("date-open");
-    this.props.callbackOnClose && this.props.callbackOnClose(this.state.selectedDate);
+    this.props.callbackOnClose &&
+      this.props.callbackOnClose(this.state.selectedDate);
     this.setState({
       datePickerOpen: false
     });
@@ -343,7 +363,9 @@ class ReactDatez extends Component {
     e.preventDefault();
 
     this.setState({
-      currentMonthYear: moment(this.state.currentMonthYear, "M YYYY").format(`${month} YYYY`),
+      currentMonthYear: moment(this.state.currentMonthYear, "M YYYY").format(
+        `${month} YYYY`
+      ),
       weekStartsOn: moment(`1 ${this.state.currentMonthYear}`, "D M YYYY")
         .set("month", month - 1)
         .day(),
@@ -355,7 +377,9 @@ class ReactDatez extends Component {
     e.preventDefault();
 
     this.setState({
-      currentMonthYear: moment(this.state.currentMonthYear, "M YYYY").format(`M ${year}`),
+      currentMonthYear: moment(this.state.currentMonthYear, "M YYYY").format(
+        `M ${year}`
+      ),
       weekStartsOn: moment(`1 ${this.state.currentMonthYear}`, "D M YYYY")
         .set("year", year)
         .day(),
@@ -390,7 +414,9 @@ class ReactDatez extends Component {
         {
           "selected-day": this.selectedDate(day.format(this.props.dateFormat)),
           "past-day": this.isPast(day.format(this.props.dateFormat)),
-          "before-start": this.isBeforeStartDate(day.format(this.props.dateFormat)),
+          "before-start": this.isBeforeStartDate(
+            day.format(this.props.dateFormat)
+          ),
           "after-end": this.isAfterEndDate(day.format(this.props.dateFormat)),
           today:
             moment()
@@ -412,7 +438,11 @@ class ReactDatez extends Component {
       );
     }
 
-    return <section className={`rdatez-month-days starts-on-${startsOn}`}>{calendar}</section>;
+    return (
+      <section className={`rdatez-month-days starts-on-${startsOn}`}>
+        {calendar}
+      </section>
+    );
   }
 
   render() {
@@ -447,7 +477,9 @@ class ReactDatez extends Component {
             readOnly
             value={
               this.props.value &&
-              moment(this.props.value, "YYYY-MM-DD").format(this.props.dateFormat)
+              moment(this.props.value, "YYYY-MM-DD").format(
+                this.props.dateFormat
+              )
             }
             ref={element => {
               this.dateInput = element;
@@ -459,22 +491,35 @@ class ReactDatez extends Component {
             placeholder={this.props.placeholder}
             onFocus={this.openPicker}
             readOnly
-            value={input.value && moment(input.value, "YYYY-MM-DD").format(this.props.dateFormat)}
+            value={
+              input.value &&
+              moment(input.value, "YYYY-MM-DD").format(this.props.dateFormat)
+            }
             ref={element => {
               this.dateInput = element;
             }}
           />
         )}
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" className="cal-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 25 25"
+          className="cal-icon"
+        >
           <g id="budicon-calendar">
             <path d="M24,2H19V.5a.5.5,0,0,0-1,0V2H7V.5a.5.5,0,0,0-1,0V2H1A1,1,0,0,0,0,3V23a1,1,0,0,0,1,1H24a1,1,0,0,0,1-1V3A1,1,0,0,0,24,2Zm0,21H1V8H24ZM24,7H1V3H24Z" />
           </g>
         </svg>
         {this.state.datePickerOpen && (
-          <div className={pickerClass} style={{ top: this.state.datePickerInputHeight }}>
+          <div
+            className={pickerClass}
+            style={{ top: this.state.datePickerInputHeight }}
+          >
             <div>
               <header className="rdatez-header">
-                <button className="rdatez-mobile-close" onClick={this.closePicker}>
+                <button
+                  className="rdatez-mobile-close"
+                  onClick={this.closePicker}
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                     <path d="M16.8535,8.1465a.5.5,0,0,0-.707,0L12.5,11.793,8.8535,8.1465a.5.5,0,0,0-.707.707L11.793,12.5,8.1465,16.1465a.5.5,0,1,0,.707.707L12.5,13.207l3.6465,3.6465a.5.5,0,0,0,.707-.707L13.207,12.5l3.6465-3.6465A.5.5,0,0,0,16.8535,8.1465Z" />
                     <path d="M12.5,0A12.5,12.5,0,1,0,25,12.5,12.5,12.5,0,0,0,12.5,0Zm0,24A11.5,11.5,0,1,1,24,12.5,11.5129,11.5129,0,0,1,12.5,24Z" />
@@ -526,7 +571,9 @@ class ReactDatez extends Component {
               </header>
               <div className="rdatez-calendar">{this.initialiseCalendar()}</div>
               {this.state.yearJumpOpen && (
-                <section className="rdatez-calendar-year">{this.initialiseYearCalendar()}</section>
+                <section className="rdatez-calendar-year">
+                  {this.initialiseYearCalendar()}
+                </section>
               )}
               {this.state.monthSelectOpen && (
                 <section className="rdatez-calendar-month">
@@ -549,7 +596,8 @@ ReactDatez.defaultProps = {
   allowFuture: true,
   yearJump: true,
   position: "left",
-  local: "ru"
+  local: "ru",
+  callbackOnOpenPicker: null
 };
 
 ReactDatez.propTypes = {
@@ -568,7 +616,8 @@ ReactDatez.propTypes = {
   yearJump: PropTypes.bool,
   placeholder: PropTypes.string,
   local: PropTypes.string,
-  callbackOnClose: PropTypes.func
+  callbackOnClose: PropTypes.func,
+  callbackOnOpenPicker: PropTypes.func
 };
 
 export default ReactDatez;

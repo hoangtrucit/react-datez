@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": " npm run clean && webpack --progress -p --config webpack.production.config.js",
-    "start":
-      "webpack-dev-server --progress --history-api-fallback --hot --inline --port 9001 --open",
+    "start": "webpack-dev-server --progress --history-api-fallback --hot --inline --port 9001 --open",
     "deploy": "npm run build && npm publish",
     "dev": "npm run start",
-    "dev:remote":
-      "webpack-dev-server --progress --history-api-fallback --hot --inline --host 0.0.0.0 --port 9000 --open",
+    "dev:remote": "webpack-dev-server --progress --history-api-fallback --hot --inline --host 0.0.0.0 --port 9000 --open",
     "clean": "rimraf ./dist && mkdir dist",
     "lint": "eslint ./app"
   },
@@ -68,11 +66,21 @@
   },
   "eslintConfig": {
     "extends": "airbnb",
-    "plugins": ["react", "jsx-a11y", "import"],
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "import"
+    ],
     "rules": {
       "comma-dangle": 0,
-      "indent": [0, 4],
-      "react/jsx-indent": [2, 4],
+      "indent": [
+        0,
+        4
+      ],
+      "react/jsx-indent": [
+        2,
+        4
+      ],
       "max-len": [
         1,
         300,
@@ -90,7 +98,10 @@
       "react/no-unescaped-entities": 0,
       "react/jsx-indent-props": 0,
       "no-console": 0,
-      "semi": ["error", "never"],
+      "semi": [
+        "error",
+        "never"
+      ],
       "react/no-string-refs": 1,
       "no-unused-vars": [
         2,
